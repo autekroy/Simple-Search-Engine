@@ -1,12 +1,14 @@
-#!/usr/bin/python
+# !/usr/bin/python
 
 # Import modules for CGI handling 
-import cgi, cgitb 
+import cgi
+import cgitb 
+cgitb.enable()
 
 # Create instance of FieldStorage 
-form = cgi.FieldStorage() 
+# form = cgi.FieldStorage() 
 
-input_url = form.getvalue('input_url')
+# input_url = form.getvalue('input_url')
 
 
 print "Content-type:text/html\r\n\r\n"

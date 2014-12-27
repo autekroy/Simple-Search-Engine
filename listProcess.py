@@ -11,3 +11,8 @@ def Union(a, b):
   for p in b:
     if p not in a:
       a.append(p)
+
+
+def printList(list):
+	for i in list:
+		print i
