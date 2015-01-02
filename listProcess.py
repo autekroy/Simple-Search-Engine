@@ -1,9 +1,10 @@
 #-----------------------------------------
 # Learning from Udacity CS 101
-# Date: 12/10, 2014
+# Date: 12/27, 2014
 #-----------------------------------------
 
 
+#----------------------------------------------------------
 # function usage: union 2 lists to the first list
 # parameter: two lists and one integer 
 # return: none
@@ -13,6 +14,10 @@ def Union(a, b):
       a.append(p)
 
 
+#----------------------------------------------------------
+# function usage: print elements in different lines from a list
+# parameter: list
+# return: none
 def printList(list):
 	for i in list:
 		print i

@@ -1,12 +1,18 @@
 #-----------------------------------------
 # Learning from Udacity CS 101
-# Date: 12/10, 2014
+# Date: 12/27, 2014
+# Email: autekwing@ucla.edu
 #-----------------------------------------
 import sys
-import listProcess
+import listProcess # from listProcess.py for list processing
+import time # python library
 
 #=============================== about crawler ====================================#
 
+#----------------------------------------------------------
+# function usage: return a webpage content
+# parameter: a url link
+# return: html page content
 def get_page(url):
   try:
     import urllib # for get html
@@ -16,6 +22,32 @@ def get_page(url):
     return htmlPage
   except:
     return ""
+
+
+# def get_page(url):
+#     try:
+#         if url == "http://www.udacity.com/cs101x/index.html":
+#             return '''<html> <body> This is a test page for learning to crawl!
+# <p> It is a good idea to
+# <a href="http://www.udacity.com/cs101x/crawling.html">
+# learn to crawl</a> before you try to
+# <a href="http://www.udacity.com/cs101x/walking.html">walk</a> or
+# <a href="http://www.udacity.com/cs101x/flying.html">fly</a>.</p></body></html>'''
+
+#         elif url == "http://www.udacity.com/cs101x/crawling.html":
+#             return '''<html> <body> I have not learned to crawl yet, but I am
+# quite good at  <a href="http://www.udacity.com/cs101x/kicking.html">kicking</a>.
+# </body> </html>'''
+
+#         elif url == "http://www.udacity.com/cs101x/walking.html":
+#             return '''<html> <body> I cant get enough
+# <a href="http://www.udacity.com/cs101x/index.html">crawling</a>!</body></html>'''
+
+#         elif url == "http://www.udacity.com/cs101x/flying.html":
+#             return '<html><body>The magic words are Squeamish Ossifrage!</body></html>'
+#     except:
+#         return ""
+#     return ""
 
 #----------------------------------------------------------
 # function usage: get the next url
@@ -29,6 +61,7 @@ def get_next_target(page):
     end_quote = page.find('"', start_quote + 1)
     url = page[start_quote + 1:end_quote]
     return url, end_quote # return as tuple, which can't be modified
+
 
 #----------------------------------------------------------
 # function usage: print all the url, need function get_next_target
@@ -64,7 +97,7 @@ def get_all_links(page):
 def crawl_web(seed, maxPages = 100):
   tocrawl = [seed] # wait for crawling
   crawled = []     # already crawled
-  index = []       # index for every webpage
+  index = {}       # index(dictionary) for every webpage
   while tocrawl:
     page = tocrawl.pop() # get an element and remove it from list
     if page not in crawled:
@@ -80,37 +113,55 @@ def crawl_web(seed, maxPages = 100):
 
 #=============================== about index ====================================#
 
+#----------------------------------------------------------
+# function usage: add indexes from a webpage
+# parameter: whole index list, url link, and webpage content
+# return: none
 def add_page_to_index(index, url, content):
   words = content.split() #split words
   for word in words:
     add_to_index(index, word, url)
 
 
+#----------------------------------------------------------
+# function usage: add indexes with source url
+# parameter: whole index list, index keyword
+# return: none
 def add_to_index(index, keyword, url):
-  for entry in index:
-    if entry[0] == keyword: # find the previous keyword
-      for urlEntry in entry[1]: # find the count number of this url in this keyword
-        if urlEntry[0] == url:
-          urlEntry[1] = urlEntry[1] + 1
-          return # alreay find so we can terminate this function
-      entry[1].append( [url, 1] )
-      return
-      
+  if keyword in index: # find the previous keyword
+    for urlEntry in index[keyword]: # find the count number of this url in this keyword
+      if urlEntry[0] == url:
+        urlEntry[1] = urlEntry[1] + 1
+        return # alreay find so we can terminate this function
+    index[keyword].append( [url, 1] )
+    return
   # not found. It's a new keyword
-  index.append( [keyword, [ [url, 1] ] ] )
+  index[keyword] = [ [url, 1] ]
 
 
+#----------------------------------------------------------
+# function usage: lookup a keyword from index list
+# parameter: whole index list and keyword
+# return: keyword in index list
 def lookup(index, keyword):
-  for entry in index:
-    if entry[0] == keyword:
-      return entry[1] # find keyword
-  return [] # didn't find keyword
+  if keyword in index:
+    return index[keyword] # find keyword
+  return None # didn't find keyword
 
 
-#---------- main funtion to run ---------- 
+#=============================== about time ====================================#
+def time_execution(code):
+  start = time.clock()  # start clock
+  result = eval(code)   # evaluate any string as if it is a Python command
+  run_time = time.clock() - start
+  return resutl, run_time
+
+
+
+#========================== main funtion to run =====================
 def main():
   EngineIndex = crawl_web( sys.argv[1] )
-  listProcess.printList( EngineIndex )
+  # listProcess.printList( EngineIndex )
   print lookup(EngineIndex, "to")
   # print crawl_web("http://www.udacity.com/cs101x/index.html")
   # print get_page("http://www.udacity.com/cs101x/index.html")
