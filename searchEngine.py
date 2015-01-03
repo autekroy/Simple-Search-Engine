@@ -54,7 +54,7 @@ def get_page(url):
 # parameter: the page html information
 # return:  url and the next position of page
 def get_next_target(page):
-    start_link = page.find('<a href=')
+    start_link = page.find('href=')
     if start_link == -1:
     	return None, 0
     start_quote = page.find('"', start_link)
@@ -94,7 +94,7 @@ def get_all_links(page):
 # function usage: crawl urls from a seed (a link)
 # parameter: a link, and max number of links
 # return: return a finited crawled url with index
-def crawl_web(seed, maxPages = 100):
+def crawl_web(seed, maxPages = 10):
   tocrawl = [seed] # wait for crawling
   crawled = []     # already crawled
   index = {}       # index(dictionary) for every webpage
@@ -105,7 +105,10 @@ def crawl_web(seed, maxPages = 100):
       if len(crawled) > maxPages:
         break
       
-      content = get_page(page)
+      content = get_page(page) # no content for this webpage. url is invalid or empty page
+      if content == "":
+        continue
+
       add_page_to_index(index, page, content)
       listProcess.Union( tocrawl, get_all_links( content ))
       crawled.append(page)      
@@ -118,7 +121,7 @@ def crawl_web(seed, maxPages = 100):
 # parameter: whole index list, url link, and webpage content
 # return: none
 def add_page_to_index(index, url, content):
-  words = content.split() #split words
+  words = content.lower().split() #split words
   for word in words:
     add_to_index(index, word, url)
 
@@ -144,6 +147,7 @@ def add_to_index(index, keyword, url):
 # parameter: whole index list and keyword
 # return: keyword in index list
 def lookup(index, keyword):
+  keyword = keyword.lower() # use lower alphabet to search
   if keyword in index:
     return index[keyword] # find keyword
   return None # didn't find keyword
@@ -161,8 +165,9 @@ def time_execution(code):
 #========================== main funtion to run =====================
 def main():
   EngineIndex = crawl_web( sys.argv[1] )
+  print EngineIndex
   # listProcess.printList( EngineIndex )
-  print lookup(EngineIndex, "to")
+  # listProcess.printList( lookup(EngineIndex, "google") )
   # print crawl_web("http://www.udacity.com/cs101x/index.html")
   # print get_page("http://www.udacity.com/cs101x/index.html")
 
