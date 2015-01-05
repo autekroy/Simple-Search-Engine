@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>SSE from autekwing</title>
-		 <meta charset="utf-8">
+		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
@@ -14,6 +14,41 @@
 	    <!-- Custom styles for this template -->
 	    <link href="navbar.css" rel="stylesheet">
 	    <!-- <link href="../bootstrap/navbar-fixed-top.css" rel="stylesheet"> -->
+	
+	<script>
+		// using AJAX to change div content
+		function loadXMLDoc(cmd){
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+  			{// code for IE7+, Firefox, Chrome, Opera, Safari
+  				xmlhttp=new XMLHttpRequest();
+  			}
+			else
+  			{// code for IE6, IE5
+  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ 	 		}
+
+			xmlhttp.onreadystatechange=function()
+  			{
+  				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+    				document.getElementById("pageDiv").innerHTML=xmlhttp.responseText;
+    			}
+  			}
+			
+			if(cmd == "crawl"){
+				var urlStr = document.getElementById('inputUrl').value;
+				xmlhttp.open("GET","testCGI.py?input_url=" + urlStr,true);
+			}
+            else if(cmd == "search"){
+				var searchStr = document.getElementById('inputSearch').value;
+                xmlhttp.open("GET","testCGI.py?input_url=" + searchStr,true);
+            }
+
+			xmlhttp.send();
+		}
+	</script>
+
 
 	</head>
 
@@ -47,40 +82,41 @@
                 </ul>
               </li>
 
-              <li><a href="mailto:autekwing@ucla.edu?Subject=About%20Simple%20Search%20Engine" target="_top">Contact</a></li>
-              <li class="dropdown">
+              <li><a href="mailto:autekwing@ucla.edu?Subject=About%20Simple%20Search%20Engine" target="_top">
+				Contact</a></li>
 
-			  <li><button type="button" class="btn btn-default navbar-btn"><a href="https://github.com/autekroy/Simple-Search-Engine">GitHub</a></button></li>
+			  <li><button type="button" class="btn btn-default navbar-btn">
+				<a href="https://github.com/autekroy/Simple-Search-Engine">
+				GitHub</a></button></li>
 
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-				
+
+            <!--<ul class="nav navbar-nav navbar-right">
             </ul>
+			-->
+
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron" id = "mainDiv">
         <h1>Simple Search Engine</h1>
         <p>This is a simple search engine. My goal is to crawl websites and make a search engine prototype. </p>
         <p>Right now, it's not working. Please wait for me.</p>
+	
+		<p><input type="text" value="http://www.udacity.com/cs101x/index.html" size="60" id = "inputUrl"/>        
+        <a class="btn btn-lg btn-primary" role="button" onclick="loadXMLDoc('crawl')">crawl &raquo;</a></p>
 
-        <form action="testCGI.py" method="get">
-			Crawl website: <input type="text" name="input_url">
-		<input type="submit" value="crawl" />
-		</form>
+		<p><input type="text" value="is" size="60" id = "inputSearch"/>        
+        <a class="btn btn-lg btn-primary" role="button" onclick="loadXMLDoc('search')">search &raquo;</a></p>
 
-		<form action="testCGI.py" method="get">
-			Search crawled webpages: <input type="text" name="input_url">
-		<input type="submit" value="search" />
-		</form>
-        
-        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">test button &raquo;</a>
+
+		<!--show the crawled or searched results--->
+		<div id = "pageDiv"></div>
 
       </div>
-
     </div> <!-- /container -->
 
 
