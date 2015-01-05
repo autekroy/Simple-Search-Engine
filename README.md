@@ -1,6 +1,7 @@
-Simple Search Engine
+[Simple Search Engine](http://104.131.95.18/SSE/)
 ============================================
 ### About this project
+ * [Demo Page](http://104.131.95.18/SSE/)
  * Inspired and learn from [Udacity CS 101](https://www.udacity.com/course/cs101)
  * Practice Python
  * [Diagram of Search Engine](https://www.udacity.com/wiki/CS101/Diagram)

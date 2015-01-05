@@ -6,6 +6,8 @@
 import sys
 import listProcess # from listProcess.py for list processing
 import time # python library
+import cgi
+import cgitb 
 
 #=============================== about crawler ====================================#
 
@@ -164,8 +166,13 @@ def time_execution(code):
 
 #========================== main funtion to run =====================
 def main():
-  EngineIndex = crawl_web( sys.argv[1] )
-  print EngineIndex
+  # EngineIndex = crawl_web( sys.argv[1] )
+  cgitb.enable()
+  form = cgi.FieldStorage() 
+  crawlStr = form.getvalue('q')
+  EngineIndex = crawl_web( crawlStr )
+  #print EngineIndex
+  print "test search"
   # listProcess.printList( EngineIndex )
   # listProcess.printList( lookup(EngineIndex, "google") )
   # print crawl_web("http://www.udacity.com/cs101x/index.html")
