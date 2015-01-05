@@ -11,3 +11,31 @@ Simple Search Engine
  2. get all the links from a page (function: print_all_links)
 
 --------------------------------------------
+### Enable Python CGI in apache2:
+#### 1. check file permission to be executable
+ ```
+ ls -al
+ chmod +x test.py
+ chmod 755 test.py
+ ```
+#### 2. check conf
+ ```
+ cd /etc/apache2
+ vim apache.conf
+ ```
+  in apache.conf, add following 
+ ```
+ <Directory /var/www>
+     Options +ExecCGI
+     AddHandler cgi-script .cgi .py
+ </Directory>
+ ```
+
+#### 3. check module
+ ```
+ apache2ctl -M
+ cgid_module (shared)
+ a2enmod cgid
+ ```
+
+#### 4. ``` service apache2 restart ```
