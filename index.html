@@ -6,12 +6,10 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	    <link rel="icon" href="../../favicon.ico">
-
-	    <title>SSE from autekwing</title>
+	    <link rel="icon" href="favicon.ico">
 
 	    <!-- Bootstrap core CSS -->
-	    <link href="../bootstrap/bootstrap.min.css" rel="stylesheet">
+	    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 
 	    <!-- Custom styles for this template -->
 	    <link href="navbar.css" rel="stylesheet">
@@ -32,29 +30,32 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SSE</a>
+            <a class="navbar-brand" href="./index.html">SSE</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown test<span class="caret"></span></a>
+
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">not work yet</a></li>
+                  <li><a href="#">Udacity</a></li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li class="dropdown-header">author</li>
+                  <li><a href="#">autekwing @ucla</a></li>
+                  <li><a href="#">CS MS student</a></li>
                 </ul>
               </li>
+
+              <li><a href="mailto:autekwing@ucla.edu?Subject=About%20Simple%20Search%20Engine" target="_top">Contact</a></li>
+              <li class="dropdown">
+
+			  <li><button type="button" class="btn btn-default navbar-btn"><a href="https://github.com/autekroy/Simple-Search-Engine">GitHub</a></button></li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="https://github.com/autekroy/Simple-Search-Engine">GitHub<span class="sr-only">(current)</span></a></li>
-
-              <li><a href="./">About</a></li>
-              <li><a href="./">Contact</a></li>
+				
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -63,13 +64,18 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Simple Search Engine</h1>
-        <p>This is a simple search engine. My goal is to crawl websites and make a search engine prototype</p>
+        <p>This is a simple search engine. My goal is to crawl websites and make a search engine prototype. </p>
+        <p>Right now, it's not working. Please wait for me.</p>
 
         <form action="testCGI.py" method="get">
-			Crawl website: <input type="text" name="input_url"><br />
-		<input type="submit" value="Submit" />
+			Crawl website: <input type="text" name="input_url">
+		<input type="submit" value="crawl" />
 		</form>
 
+		<form action="testCGI.py" method="get">
+			Search crawled webpages: <input type="text" name="input_url">
+		<input type="submit" value="search" />
+		</form>
         
         <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">test button &raquo;</a>
 
@@ -82,8 +88,8 @@
 	    ================================================== -->
 	    <!-- Placed at the end of the document so the pages load faster -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	    <script src="../bootstrap/bootstrap.min.js"></script>
+	    <script src="bootstrap/bootstrap.min.js"></script>
 	    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	    <script src="../bootstrap/ie10-viewport-bug-workaround.js"></script>		
+	    <script src="bootstrap/ie10-viewport-bug-workaround.js"></script>		
 	</body>
 </html>
