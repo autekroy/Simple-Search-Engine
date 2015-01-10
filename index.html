@@ -12,7 +12,7 @@
 	    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 
 	    <!-- Custom styles for this template -->
-	    <link href="navbar.css" rel="stylesheet">
+	    <link href="bootstrp/navbar.css" rel="stylesheet">
 	    <!-- <link href="../bootstrap/navbar-fixed-top.css" rel="stylesheet"> -->
 	
 	<script>
@@ -35,7 +35,7 @@
     				document.getElementById("pageDiv").innerHTML=xmlhttp.responseText;
     			}
   			}
-			
+			/*
 			if(cmd == "crawl"){
 				var urlStr = document.getElementById('inputUrl').value;
 				xmlhttp.open("GET","testCGI.py?url=" + urlStr,true);
@@ -44,6 +44,10 @@
 				var searchStr = document.getElementById('inputSearch').value;
                 xmlhttp.open("GET","testCGI.py?q=" + searchStr,true);
             }
+			*/
+			var searchStr = document.getElementById('inputSearch').value;
+			var urlStr = document.getElementById('inputUrl').value;
+			xmlhttp.open("GET","testCGI.py?url=" + urlStr + "&q=" + searchStr,true);
 
 			xmlhttp.send();
 		}

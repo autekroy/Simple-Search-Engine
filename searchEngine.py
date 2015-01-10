@@ -150,7 +150,7 @@ def add_to_index(index, keyword, url):
 # return: keyword in index list
 def lookup(index, keyword):
   keyword = keyword.lower() # use lower alphabet to search
-  if keyword in index:
+  if index and keyword in index:
     return index[keyword] # find keyword
   return None # didn't find keyword
 

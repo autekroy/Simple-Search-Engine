@@ -19,5 +19,6 @@ def Union(a, b):
 # parameter: list
 # return: none
 def printList(list):
+  if list:
 	for i in list:
 		print i

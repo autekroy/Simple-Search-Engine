@@ -1,5 +1,8 @@
 #! /usr/bin/python2.7
 
+# Python CGI test for simple search engine
+# ex: http://104.131.95.18/SSE/testCGI.py?q=is&url=http://www.udacity.com/cs101x/index.html
+
 # Import modules for CGI handling 
 from searchEngine import *
 import listProcess # from listProcess.py for list processing
@@ -23,12 +26,22 @@ if form.getvalue('q'):
   q = form.getvalue('q')
 
 
-EngineIndex = crawl_web("http://www.udacity.com/cs101x/index.html")
+print url
+print 
+print q
+print 
+
+EngineIndex = {}
+# EngineIndex = crawl_web("http://www.udacity.com/cs101x/index.html")
 
 if len(url) != 0:
   EngineIndex = crawl_web( url )
+  print "there are all the indexes"
   print EngineIndex
-elif len(q) != 0:
+
+print "<p></p>"
+
+if len(q) != 0:
   print "search results for " + q
   print "<p></p>" 
   listProcess.printList( lookup(EngineIndex, "to") )
