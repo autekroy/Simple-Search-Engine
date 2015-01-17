@@ -40,3 +40,20 @@
  ```
 
 #### 4. ``` service apache2 restart ```
+
+
+============================================
+## Reference:
+
+--------------------------------------------
+### About MySQL
+
+[mysql error reference](http://mustgeorge.blogspot.com/2011/11/mysql-error-1045-28000-using-password.html)
+
+run mysql
+```
+mysql -u root -p
+```
+
+[phpmyadmin](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-14-04)
+

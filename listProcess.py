@@ -22,3 +22,13 @@ def printList(list):
   if list:
 	for i in list:
 		print i
+
+
+#----------------------------------------------------------
+# function usage: print elements in different lines in HTML formats from a list
+# parameter: list
+# return: none
+def printHTMLList(list):
+  if list:
+    for i in list:
+        print i + "<br>"

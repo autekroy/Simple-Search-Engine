@@ -26,22 +26,25 @@ if form.getvalue('q'):
   q = form.getvalue('q')
 
 
+print "crawl this URL: \""
 print url
-print 
-print q
-print 
+print "\"  and search this keyword: \"" + q + "\""
+print "<br />"
 
 EngineIndex = {}
 # EngineIndex = crawl_web("http://www.udacity.com/cs101x/index.html")
 
 if len(url) != 0:
-  EngineIndex = crawl_web( url )
-  print "there are all the indexes"
-  print EngineIndex
-
-print "<p></p>"
+  EngineIndex, EngineGraph= crawl_web( url )
 
 if len(q) != 0:
-  print "search results for " + q
-  print "<p></p>" 
-  listProcess.printList( lookup(EngineIndex, "to") )
+  print "search results for \"" + q + "\"<br />"
+  print "<pre>"
+  listProcess.printList( lookup(EngineIndex, q) )
+  print "</pre>"
+
+print "<br/>"
+print "there are all the indexes: "
+print "<pre>" + str(EngineIndex) + "</pre>"
+
+

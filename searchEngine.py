@@ -1,6 +1,6 @@
-#-----------------------------------------
+#----------------------------------------
 # Learning from Udacity CS 101
-# Date: 12/27, 2014
+# Date: 01/12, 2015
 # Email: autekwing@ucla.edu
 #-----------------------------------------
 import sys
@@ -100,6 +100,7 @@ def crawl_web(seed, maxPages = 10):
   tocrawl = [seed] # wait for crawling
   crawled = []     # already crawled
   index = {}       # index(dictionary) for every webpage
+  graph = {}       # <url>, [list of pages it links to]
   while tocrawl:
     page = tocrawl.pop() # get an element and remove it from list
     if page not in crawled:
@@ -112,9 +113,11 @@ def crawl_web(seed, maxPages = 10):
         continue
 
       add_page_to_index(index, page, content)
-      listProcess.Union( tocrawl, get_all_links( content ))
+      outLinks = get_all_links( content )
+      graph[page] = outLinks
+      listProcess.Union( tocrawl, outLinks)
       crawled.append(page)      
-  return index
+  return index, graph
 
 #=============================== about index ====================================#
 
@@ -154,6 +157,50 @@ def lookup(index, keyword):
     return index[keyword] # find keyword
   return None # didn't find keyword
 
+#----------------------------------------------------------
+# function usage: 
+# parameter:
+# return:
+def popularity(t, p):
+  if t == 0:
+    return 1
+  else:
+    score = 0
+    for f in firends(p):
+      score = score + popularity(t-1, f) # recursive to find the socres
+    return score
+
+
+#----------------------------------------------------------
+# function usage: 
+# parameter:
+# return:
+def compute_ranks(graph):
+    d = 0.8 # damping factor
+    numloops = 10
+
+    ranks = {}
+    npages = len(graph)
+    for page in graph:
+        ranks[page] = 1.0 / npages
+
+    for i in range(0, numloops):
+        newranks = {}
+        for page in graph:
+            newrank = (1 - d) / npages
+
+            #Insert Code Here
+
+            newranks[page] = newrank
+        ranks = newranks
+    return ranks
+
+#----------------------------------------------------------
+# function usage: 
+# parameter:
+# return:
+def lookup_best(index, graph, keyword):
+ return None 
 
 #=============================== about time ====================================#
 def time_execution(code):
@@ -167,16 +214,21 @@ def time_execution(code):
 #========================== main funtion to run =====================
 def main():
   # EngineIndex = crawl_web( sys.argv[1] )
-  cgitb.enable()
-  form = cgi.FieldStorage() 
-  crawlStr = form.getvalue('q')
-  EngineIndex = crawl_web( crawlStr )
+  #cgitb.enable()
+  #form = cgi.FieldStorage() 
+  #crawlStr = form.getvalue('q')
+  #EngineIndex = crawl_web( crawlStr )
   #print EngineIndex
-  print "test search"
+  #print "test search"
   # listProcess.printList( EngineIndex )
   # listProcess.printList( lookup(EngineIndex, "google") )
-  # print crawl_web("http://www.udacity.com/cs101x/index.html")
-  # print get_page("http://www.udacity.com/cs101x/index.html")
+  index, graph = crawl_web("http://www.udacity.com/cs101x/index.html")
+  print index
+  print 
+  print graph
+  listProcess.printList( lookup(index, "to") )
+  # listProcess.printHTMLList( lookup_best(index, graph, "to") )
+  #i print get_page("http://www.udacity.com/cs101x/index.html")
 
 if __name__ == '__main__':
   main()

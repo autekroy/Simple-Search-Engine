@@ -77,12 +77,15 @@
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">not work yet</a></li>
-                  <li><a href="#">Udacity</a></li>
+                  <li><a href="#">Not work yet</a></li>
+                  <li><a href="https://www.udacity.com/course/cs101">From Udacity</a></li>
                   <li class="divider"></li>
-                  <li class="dropdown-header">author</li>
-                  <li><a href="#">autekwing @ucla</a></li>
-                  <li><a href="#">CS MS student</a></li>
+                  <li class="dropdown-header">about author</li>
+                  <li><a href="https://www.linkedin.com/in/yaojenchang" target = "_blank">My LinkedIn</a></li>
+                  <li><a href="https://github.com/autekroy" target = "_blank">My GitHub</a></li>
+                  <li><a href="mailto:autekwing@ucla.edu?Subject=About%20Simple%20Search%20Engine" target="_top">
+                    autekwing@ucla.edu</a></li>
+                  <li><a href="#">UCLA CS Master</a></li>
                 </ul>
               </li>
 
@@ -90,15 +93,18 @@
 				Contact</a></li>
 
 			  <li><button type="button" class="btn btn-default navbar-btn">
-				<a href="https://github.com/autekroy/Simple-Search-Engine">
-				GitHub</a></button></li>
+				<a href="https://github.com/autekroy/Simple-Search-Engine" target = "_blank">
+				Project GhitHub</a></button></li>
 
 
             </ul>
 
-            <!--<ul class="nav navbar-nav navbar-right">
-            </ul>
-			-->
+            <ul class="nav navbar-nav navbar-right">
+                         <li><button type="button" class="btn btn-default navbar-btn">
+                <a href="signIn.html" onclick="window.open(this.href,'name','width=600,height=410'); return false; ">
+                Sign In</a></button></li> 
+			</ul>
+		
 
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -108,12 +114,13 @@
       <div class="jumbotron" id = "mainDiv">
         <h1>Simple Search Engine</h1>
         <p>This is a simple search engine. My goal is to crawl websites and make a search engine prototype. </p>
-        <p>Right now, it's not working. Please wait for me.</p>
+        <p>Right now, you can crawel from a webpage and search keyword from this crawel.</p> 
+		<p>But the pages is not ranked and don't have good layout for results. Please wait for me to update.</p>
 	
-		<p><input type="text" value="http://www.udacity.com/cs101x/index.html" size="60" id = "inputUrl"/>        
+		<p><input type="text" value="http://en.wikipedia.org/wiki/List_of_Doctor_Who_serials" size="60" id = "inputUrl"/>        
         <a class="btn btn-lg btn-primary" role="button" onclick="loadXMLDoc('crawl')">crawl &raquo;</a></p>
 
-		<p><input type="text" value="is" size="60" id = "inputSearch"/>        
+		<p><input type="text" value="doctor" size="60" id = "inputSearch"/>        
         <a class="btn btn-lg btn-primary" role="button" onclick="loadXMLDoc('search')">search &raquo;</a></p>
 
 
