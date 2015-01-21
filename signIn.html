@@ -11,6 +11,40 @@
         <!-- Bootstrap core CSS -->
         <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
 
+
+    <script type="text/javascript" src="resource/js/md5.js"></script>
+	<script>
+        // using AJAX to change div content
+        function loadXMLDoc(){
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("mainDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            var user = document.getElementById('login-username').value;
+            var pw = document.getElementById('login-password').value;
+			pw = hex_md5(pw);
+
+			var postCMD = "username=" + user + "&password=" + pw;
+
+            xmlhttp.open("GET", "login.py?" + postCMD, true);
+//			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.send();
+        }
+    </script>
+
 	</head>
 
     <div class="container">    
@@ -21,7 +55,7 @@
                         <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                     </div>     
 
-                    <div style="padding-top:30px" class="panel-body" >
+                    <div style="padding-top:30px" class="panel-body" id = "mainDiv">
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
@@ -52,9 +86,9 @@
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                      <a id="btn-login" href="login.py" class="btn btn-success">Login  </a>
+                                      <a id="btn-login"  onclick="loadXMLDoc()" class="btn btn-success">Login</a>
                                       <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
-
+									  <a id="btn-login" href="#" class="btn btn-primary">Sign up</a>
                                     </div>
                                 </div>
 
