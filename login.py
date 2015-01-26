@@ -13,12 +13,12 @@ cgitb.enable()
 # Create instance of FieldStorage 
 form = cgi.FieldStorage() 
 
-user = form.getvalue('username')
+email = form.getvalue('usermail')
 pw =   form.getvalue('password')
 
 print "Content-type:text/html\r\n\r\n"
 
-print "input user: " + user + " input password:  " + pw + "<br>"
+print "input user: " + email + " input password:  " + pw + "<br>"
 
 db = MySQLdb.connect(host="localhost", user="root", passwd="123456", db="SSE")
 cursor = db.cursor()
@@ -32,10 +32,7 @@ for record in result:
   print record
   print
 
-if "@" in user: # mean user input a email
-  sqlcmd = "select * from SSE.user where email=\"" + user + "\";"
-else:
-  sqlcmd = "select * from SSE.user where name=\"" + user + "\";"
+sqlcmd = "select * from SSE.user where email=\"" + email + "\";"
 
 cursor.execute(sqlcmd);
 result = cursor.fetchall()
